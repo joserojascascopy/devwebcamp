@@ -1,0 +1,37 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+p {
+    font-size: 1.5rem;
+    color: v.$negro;
+}
+
+button,
+legend,
+label,
+input,
+a {
+    font-size: 1.5rem;
+}
+
+h1,
+h2,
+h3 {
+    @include m.headings;
+}
+
+h1 {
+    font-size: 5rem;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+[class$="__heading"] {
+    @include m.nombre-pagina;
+}

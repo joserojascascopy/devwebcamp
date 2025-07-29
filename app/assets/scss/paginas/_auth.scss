@@ -1,0 +1,12 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.auth {
+    @include m.container-sm;
+
+    &__texto {
+        margin-bottom: 1.5rem;
+        font-weight: v.$regular;
+        text-align: center;
+    }
+}

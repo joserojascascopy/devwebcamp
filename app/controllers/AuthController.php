@@ -55,7 +55,7 @@ class AuthController {
 
         // Render de la vista Login
         $router->render('auth/login', [
-            'titulo' => 'Login',
+            'titulo' => 'Iniciar Sesión',
             'alertas' => $alertas
         ]);
     }
