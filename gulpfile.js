@@ -7,12 +7,12 @@ function css() {
         .pipe(sourcemaps.init())
         .pipe(sass({ style: 'compressed' }).on('error', sass.logError))
         .pipe(sourcemaps.write('.'))
-        .pipe(dest('./public/assets/css'));
+        .pipe(dest('./public/build/css'));
 }
 
 function js() {
     return src('./app/assets/js/**/*.js')
-        .pipe(dest('./public/assets/js'));
+        .pipe(dest('./public/build/js'));
 }
 
 function watchArchivos() {
