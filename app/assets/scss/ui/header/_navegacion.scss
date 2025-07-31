@@ -1,0 +1,33 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.navegacion {
+    display: flex;
+    flex-direction: column;
+
+    @include m.desktop {
+        flex-direction: row;
+    }
+
+    &__enlace {
+        color: v.$blanco;
+        font-size: 2rem;
+        font-weight: v.$bold;
+        text-transform: uppercase;
+        padding: 3rem 1rem;
+        text-align: center;
+
+        &:hover {
+            background-color: v.$blanco;
+            color: v.$azul;
+        }
+    }
+
+    &__enlace:last-of-type {
+        margin-bottom: 1rem;
+
+        @include m.desktop {
+            margin-bottom: 0;
+        }
+    }
+}
