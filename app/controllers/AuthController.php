@@ -28,7 +28,7 @@ class AuthController {
                 if($usuario && $usuario->confirmado) {
                     // Verificar que la contraseña es correcta
                     $resultado = $usuario->passwordVerify($password);
-                    
+
                     if($resultado) {
                         // Iniciar Sesión
                         session_start();
@@ -37,11 +37,17 @@ class AuthController {
                             'id' => $usuario->id,
                             'nombre' => $usuario->nombre,
                             'email' => $email,
-                            'login' => true
+                            'login' => true,
+                            'admin' => $usuario->admin ?? null
                         ];
 
-                        // Redirigir al usuario al dashboard
-                        header('Location: /dashboard');
+                        if($usuario->admin) {
+                            // Redirigir al admin al panel de administrador
+                            header('Location: /dashboard');
+                        }else {
+                            // Redirigir al usuario a la pagina principal
+                            header('Location: /');
+                        }
 
                     }else {
                         $alertas = Usuario::setAlerta('error', 'La contraseña es incorrecta');
@@ -126,7 +132,7 @@ class AuthController {
             $usuario = new Usuario($_POST);
             // Validar el formulario
             $alertas = $usuario->emailValidation();
-            
+
             if(empty($alertas)) {
                 $email = $usuario->email;
                 /** @var Usuario|null $usuario */
@@ -165,7 +171,7 @@ class AuthController {
         $usuario = new Usuario;
         // Obtenemos el array de alertas vacio desde la clase
         $alertas = Usuario::getAlertas();
-        $error = true;
+        $error = false;
 
         // Accedemos al token del query string
         $token = $_GET['token'];
@@ -179,7 +185,7 @@ class AuthController {
 
         if(!$usuario) {
             $alertas = Usuario::setAlerta('error', 'Token no válido');
-            $error = false;
+            $error = true;
         }
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -199,7 +205,7 @@ class AuthController {
                 $usuario->hashPassword();
                 // Actualizar el usuario en la DB
                 $resultado = $usuario->guardar();
-            
+
                 if($resultado) {
                     $alertas = Usuario::setAlerta('exito', 'Contraseña reestablecida correctamente');
                     $error = false;
@@ -217,7 +223,7 @@ class AuthController {
     }
 
     public static function mensaje(Router $router) {
-        
+
         $router->render('auth/mensaje', [
             'titulo' => 'Cuenta Creada Exitosamente'
         ]);
@@ -237,7 +243,7 @@ class AuthController {
 
         if(empty($usuario)) {
             // No se encontro un usuario con el token
-            $alertas = Usuario::setAlerta('error', 'Token no válido');
+            $alertas = Usuario::setAlerta('error', 'Token no válido, la cuenta no ha sido confirmada');
             $error = true;
         }else {
             // Confirmar la cuenta

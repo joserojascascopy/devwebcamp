@@ -35,6 +35,10 @@ class Usuario extends Model {
             self::$alertas['error'][] = 'El nombre no puede estar vacio';
         }
 
+        if(!$this->apellido) {
+            self::$alertas['error'][] = 'El apellido no puede estar vacio';
+        }
+
         if(!$this->email) {
             self::$alertas['error'][] = 'El email es obligatorio';
         }

@@ -40,7 +40,7 @@ class Email {
             $mail->Port = MAIL_PORT;
         
             //Recipients
-            $mail->setFrom('admin@uptask.com', 'Uptask');
+            $mail->setFrom('admin@devwebcamp.com', 'DevWebCamp');
             $mail->addAddress($this->email, $this->nombre);
         
             //Content
@@ -49,7 +49,7 @@ class Email {
             $mail->Subject = 'Confirma tu cuenta';
 
             $contenido = "<html>";
-            $contenido .= "<p><strong>Hola, " . $this->nombre . "</strong>. Has creado tu cuenta en Uptask
+            $contenido .= "<p><strong>Hola, " . $this->nombre . "</strong>. Has creado tu cuenta en DevWebCamp
             , solo debes confirmarla presionando el siguiente enlace.</p>";
             $contenido .= "<p>Presiona aquí: <a href='http://localhost:3000/confirmar?token=" . $this->token . "'>Confirmar cuenta</a></p>";
             $contenido .= "<p>Si tu no creaste esta cuenta, puedes ignorar este mensaje.</p>";
@@ -75,7 +75,7 @@ class Email {
         $mail->Username = MAIL_USERNAME;
         $mail->Password = MAIL_PASSWORD;
 
-        $mail->setFrom('admin@uptask.com', 'Uptask');
+        $mail->setFrom('admin@devwebcamp.com', 'DevWebCamp');
         $mail->addAddress($this->email, $this->nombre);
 
         //Content
