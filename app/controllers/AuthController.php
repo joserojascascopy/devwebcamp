@@ -43,7 +43,7 @@ class AuthController {
 
                         if($usuario->admin) {
                             // Redirigir al admin al panel de administrador
-                            header('Location: /dashboard');
+                            header('Location: /admin/dashboard');
                         }else {
                             // Redirigir al usuario a la pagina principal
                             header('Location: /');
