@@ -46,6 +46,13 @@ class Router {
         include_once __DIR__ . "/../app/views/$views.php";
         $root = ob_get_clean();
 
-        include_once __DIR__ . "/../app/views/main.php";
+        // Utilizar el layout de acuerdo a la URL
+        $currentUrl = strtok($_SERVER['REQUEST_URI'], '?') ?? '/';
+
+        if(str_contains($currentUrl, '/admin')) {
+            include_once __DIR__ . "/../app/views/admin-layout.php";
+        }else {
+            include_once __DIR__ . "/../app/views/main.php";
+        }
     }
 }

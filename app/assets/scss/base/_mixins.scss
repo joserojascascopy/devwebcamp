@@ -135,3 +135,14 @@
         display: none;
     }
 }
+
+@mixin enlace {
+    color: v.$blanco;
+    text-transform: uppercase;
+    font-weight: v.$bold;
+
+    &:hover {
+        color: v.$azul;
+        cursor: pointer;
+    }
+}
