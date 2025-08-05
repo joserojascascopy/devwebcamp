@@ -76,6 +76,12 @@
         }
     }
 
+    &__enlace--actual {
+        background-color: color.adjust(v.$gris-oscuro, $lightness: 10%);
+        color: v.$blanco;
+        border-radius: 1rem;
+    }
+
     &__icono {
         font-size: 2rem;
     }
@@ -93,6 +99,23 @@
 
         @include m.tablet {
             padding: 1rem;
+        }
+    }
+
+    &__contenedor-boton {
+        @include m.tablet {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    &__boton {
+        @include m.boton(v.$azul, v.$blanco);
+        text-transform: uppercase;
+        font-size: 1.4rem;
+
+        @include m.tablet {
+            width: auto;
         }
     }
 }

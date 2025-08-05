@@ -22,7 +22,7 @@
         </main>
     </div>
 
-    <script src="/build/js/bundle.min.js" defer></script>
+    <script src="/build/js/script.js" defer></script>
 </body>
 
 </html>

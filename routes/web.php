@@ -2,6 +2,10 @@
 
 use Controllers\AuthController;
 use Controllers\DashboardController;
+use Controllers\PonentesController;
+use Controllers\EventosController;
+use Controllers\RegalosController;
+use Controllers\RegistradosController;
 use MVC\Router;
 
 $router = new Router;
@@ -29,3 +33,16 @@ $router->get('/confirmar', [AuthController::class, 'confirmar']);
 
 // Dashboard para administrador
 $router->get('/admin/dashboard', [DashboardController::class, 'index']);
+
+// Ponentes
+$router->get('/admin/ponentes', [PonentesController::class, 'index']);
+$router->get('/admin/ponentes/crear', [PonentesController::class, 'crear']);
+
+// Eventos
+$router->get('/admin/eventos', [EventosController::class, 'index']);
+
+// Registrados
+$router->get('/admin/registrados', [RegistradosController::class, 'index']);
+
+// Regalos
+$router->get('/admin/regalos', [RegalosController::class, 'index']);
