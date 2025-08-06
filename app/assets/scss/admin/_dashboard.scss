@@ -103,6 +103,8 @@
     }
 
     &__contenedor-boton {
+        margin-bottom: 2rem;
+
         @include m.tablet {
             display: flex;
             justify-content: flex-end;
@@ -117,5 +119,13 @@
         @include m.tablet {
             width: auto;
         }
+    }
+
+    &__formulario {
+        @include m.shadow;
+        @include m.container-md;
+        background-color: v.$blanco;
+        padding: 2rem;
+        border-radius: 1rem;
     }
 }

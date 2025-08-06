@@ -56,6 +56,11 @@
     margin: 0 auto;
 }
 
+@mixin container-md {
+    width: min(95%, 80rem);
+    margin: 0 auto;
+}
+
 @mixin container-sm {
     width: min(95%, 60rem);
     margin: 0 auto;
@@ -145,4 +150,8 @@
         color: v.$azul;
         cursor: pointer;
     }
+}
+
+@mixin shadow {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

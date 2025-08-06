@@ -10,9 +10,9 @@
 <div class="dashboard__formulario">
     <?php include_once __DIR__ . '/../../templates/alertas.php'; ?>
 
-    <form class="formulario">
+    <form class="formulario" method="POST" action="/admin/ponentes/crear" enctype="multipart/form-data">
+        <?php include_once __DIR__ . '/formulario.php'; ?>
 
-
-        <input type="submit" value="Registrar Ponente">
+        <input class="formulario__submit formulario__submit--registrar" type="submit" value="Registrar Ponente">
     </form>
 </div>
