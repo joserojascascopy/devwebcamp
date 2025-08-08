@@ -75,6 +75,13 @@ class Model {
         return $resultado;
     }
 
+    // Obtener todos los Registros
+    public static function all() {
+        $query = "SELECT * FROM " . static::$table;
+        $resultado = self::consultaSQL($query);
+        return $resultado;
+    }
+
     // Eliminar
     public function eliminar() {
         $query = "DELETE FROM " . static::$table . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";

@@ -3,7 +3,7 @@
 @use 'sass:color';
 
 .dashboard {
-    min-height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background-color: v.$gris-claro;
@@ -47,6 +47,7 @@
     &__grid {
         display: flex;
         flex: 1;
+        overflow-y: auto;
     }
 
     &__sidebar {
@@ -96,9 +97,11 @@
     &__contenido {
         width: 100%;
         padding: 2rem;
+        overflow-y: scroll;
+        scrollbar-width: none;
 
         @include m.tablet {
-            padding: 1rem;
+            padding: 1rem 1rem 6rem 1rem;
         }
     }
 
@@ -119,6 +122,14 @@
         @include m.tablet {
             width: auto;
         }
+    }
+
+    &__contenedor {
+        @include m.shadow;
+        background-color: v.$blanco;
+        padding: 2rem;
+        border-radius: 1rem;
+        margin-top: 5rem;
     }
 
     &__formulario {

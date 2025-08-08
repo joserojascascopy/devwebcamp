@@ -74,4 +74,16 @@
             width: 100%;
         }
     }
+
+    &__listado {
+        @include m.tags;
+    }
+
+    &__texto {
+        color: rgba(v.$negro, 0.8);
+    }
+
+    &__imagen {
+        max-width: 20rem;
+    }
 }

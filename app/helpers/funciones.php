@@ -4,6 +4,7 @@ function debug($variable) {
     echo "<pre>";
     echo var_dump($variable);
     echo "</pre>";
+    exit;
 }
 
 function pagina_actual($path) : bool {
