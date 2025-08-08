@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody class="table_tbody">
-                <?php foreach ($ponentes as $ponente) { ?>
+                <?php foreach ($ponentes as $ponente) : ?>
                     <tr class="table__tr">
                         <td class="table__td">
                             <?php echo $ponente->nombre . ' ' . $ponente->apellido; ?>
@@ -32,7 +32,8 @@
                                 Editar
                             </a>
 
-                            <form class="table__formulario">
+                            <form class="table__formulario" method="POST" action="/admin/ponentes/eliminar">
+                                <input type="hidden" name="id" value="<?php echo $ponente->id; ?>">
                                 <button class="table__accion table__accion--eliminar" type="submit">
                                     <i class="fa-solid fa-circle-xmark"></i>
                                     Eliminar
@@ -40,7 +41,7 @@
                             </form>
                         </td>
                     </tr>
-                <?php } ?>
+                <?php endforeach ?>
             </tbody>
         </table>
     <?php } else { ?>

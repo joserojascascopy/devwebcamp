@@ -7,9 +7,10 @@ use Models\Ponentes;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
-class PonentesController
-{
+class PonentesController {
     public static function index(Router $router) {
+        isAdmin();
+
         $ponentes = Ponentes::all();
 
         $router->render('admin/ponentes/index', [
@@ -19,6 +20,8 @@ class PonentesController
     }
 
     public static function crear(Router $router) {
+        isAdmin();
+
         $alertas = Ponentes::getAlertas();
 
         $ponente = new Ponentes;
@@ -86,6 +89,8 @@ class PonentesController
     }
 
     public static function editar(Router $router) {
+        isAdmin();
+
         $alertas = Ponentes::getAlertas();
         // Validar el Id
         $ponente_id = $_GET['id'];
@@ -164,6 +169,30 @@ class PonentesController
     }
 
     public static function eliminar() {
+        isAdmin();
 
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            /** @var Ponentes|null $ponente */
+            $ponente = Ponentes::find($id);
+
+            if(empty($ponente)) {
+                header('Location: /admin/ponentes');
+            }
+
+            if(file_exists('imagenes/speakers')) {
+                $path_imagen_png = 'imagenes/speakers/' . $ponente->imagen . '.png';
+                $path_imagen_webp = 'imagenes/speakers/' . $ponente->imagen . '.webp';
+                
+                unlink($path_imagen_png);
+                unlink($path_imagen_webp);
+            }
+
+            $resultado = $ponente->eliminar();
+
+            if($resultado) {
+                header('Location: /admin/ponentes');
+            }
+        }
     }
 }

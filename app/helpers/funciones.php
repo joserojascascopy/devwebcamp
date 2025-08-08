@@ -10,3 +10,19 @@ function debug($variable) {
 function pagina_actual($path) : bool {
     return str_contains($_SERVER['PATH_INFO'], $path) ? true : false;
 }
+
+function isAuth() {
+    session_start();
+
+    if(!$_SESSION['login']) {
+        header('Location: /login');
+    }
+}
+
+function isAdmin() {
+    session_start();
+
+    if(!$_SESSION['admin']) {
+        header('Location: /login');
+    }
+}
