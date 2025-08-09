@@ -95,7 +95,7 @@
     }
 
     &__contenido {
-        width: 100%;
+        @include m.container-md;
         padding: 2rem;
         overflow-y: scroll;
         scrollbar-width: none;
