@@ -6,16 +6,35 @@ use MVC\Router;
 use Models\Ponentes;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Libraries\Paginacion;
 
 class PonentesController {
     public static function index(Router $router) {
         isAdmin();
 
-        $ponentes = Ponentes::all();
+        $pagina_actual = $_GET['page'];
+        $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
+
+        $registros_por_pagina = 10;
+
+        if(!$pagina_actual || $pagina_actual < 1) {
+            header('Location: /admin/ponentes?page=1');
+        }
+
+        $total_registro = Ponentes::total();
+
+        $paginacion = new Paginacion($pagina_actual, $registros_por_pagina, $total_registro);
+
+        if($paginacion->total_paginas() < $pagina_actual) {
+            header('Location: /admin/ponentes?page=1');
+        }
+
+        $ponentes = Ponentes::paginar($registros_por_pagina, $paginacion->offset());
 
         $router->render('admin/ponentes/index', [
             'titulo' => 'Ponentes / Conferencistas',
-            'ponentes' => $ponentes
+            'ponentes' => $ponentes,
+            'paginacion' => $paginacion->paginacion()
         ]);
     }
 

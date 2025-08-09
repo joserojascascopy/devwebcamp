@@ -82,6 +82,22 @@ class Model {
         return $resultado;
     }
 
+    // Traer el total de un registro
+    public static function total() {
+        $query = "SELECT COUNT(*) FROM " . static::$table;
+        $resultado = self::$db->query($query);
+        $total = $resultado->fetch_array();
+
+        return array_shift($total);
+    }
+
+    // Paginar los registros
+    public static function paginar($por_pagina, $offset) {
+        $query = "SELECT * FROM " . static::$table . " LIMIT $por_pagina OFFSET $offset";
+        $resultado = self::consultaSQL($query);
+        return $resultado;
+    }
+
     // Eliminar
     public function eliminar() {
         $query = "DELETE FROM " . static::$table . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
