@@ -48,7 +48,8 @@
         color: rgba(v.$negro, 0.8);
     }
 
-    &__input {
+    &__input,
+    &__select {
         padding: 1rem;
         border: 1px solid color.adjust(v.$gris-claro, $lightness: -20%);
         border-radius: .5rem;
@@ -62,6 +63,17 @@
             flex: 1;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
+        }
+    }
+
+    &__radio {
+        display: flex;
+        gap: 3rem;
+
+        &--centrar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
     }
 
