@@ -1,5 +1,6 @@
 <?php
 
+use Controllers\ApiEventos;
 use Controllers\AuthController;
 use Controllers\DashboardController;
 use Controllers\PonentesController;
@@ -52,3 +53,6 @@ $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 
 // Regalos
 $router->get('/admin/regalos', [RegalosController::class, 'index']);
+
+// API
+$router->get('/api/eventos-horario', [ApiEventos::class, 'index']);

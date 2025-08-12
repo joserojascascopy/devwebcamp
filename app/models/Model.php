@@ -149,6 +149,27 @@ class Model {
         return array_shift($resultado);
     }
 
+    // Busqueda where con multiples opciones
+    public static function whereArray($array = []) {
+        $query = "SELECT * FROM " . static::$table . " WHERE ";
+
+        foreach($array as $key => $value) {
+            $query .= "$key = '$value' AND ";
+        }
+
+        // $conditions = [];
+        // foreach ($array as $key => $value) {
+        //     $conditions[] = "$key = '$value'";
+        // }
+        // $query = "SELECT * FROM " . static::$table . " WHERE " . implode(' AND ', $conditions);
+        
+        $query = rtrim($query, ' AND');
+
+        $resultado = self::consultaSQL($query);
+
+        return $resultado;
+    }
+
     public static function consultaSQL($query) {
         // Consulta a la DB
         $consulta = self::$db->query($query);

@@ -5,9 +5,9 @@
     }
 
     const categoria = document.querySelector('[name="categoria_id"]');
-    const horas = document.querySelectorAll('#horas');
     const dias = document.querySelectorAll('[name="dia"]');
     const inputHiddenDia = document.querySelector('[name="dia_id"]');
+    const inputHiddenHora = document.querySelector('[name="hora_id"]');
         
 
     dias.forEach(dia => dia.addEventListener('change', terminoBusqueda));
@@ -15,6 +15,51 @@
 
     function terminoBusqueda(e) {
         busqueda[e.target.name] = e.target.value;
+
+        // if(busqueda.categoria_id === '' || busqueda.dia === '') {
+        //     return;
+        // }
+
+        if(Object.values(busqueda).includes('')) {
+            return;
+        }
+
+        buscarEventos();
+    }
+
+    async function buscarEventos() {
+        const {dia, categoria_id} = busqueda;
+
+        const url = `http://localhost:3000/api/eventos-horario?dia_id=${dia}&categoria_id=${categoria_id}`;
+        const res = await fetch(url);
+        
+        const eventos = await res.json();
+
+        obtenerHorasDisponibles(eventos);
+    }
+
+    function obtenerHorasDisponibles(eventos) {
+        const horasTomadas = eventos.map(evento => evento.hora_id);
+        const listadoHoras = document.querySelectorAll('#horas');
+        const listadoHorasArray = Array.from(listadoHoras);
+        
+        const horarioDisponible = listadoHorasArray.filter(listado => !horasTomadas.includes(listado.dataset.horaId));
+        horarioDisponible.forEach(horaDisponible => horaDisponible.classList.remove('horas__hora--deshabilitada'))
+        
+        horarioDisponible.forEach(horaDisponible => horaDisponible.addEventListener('click', seleccionarHora));
+    }
+
+    function seleccionarHora(e) {
+        const seleccionAnterior = document.querySelector('.horas__hora--seleccionada');
+
+        if(seleccionAnterior) {
+            seleccionAnterior.classList.remove('horas__hora--seleccionada');
+        }
+        
+        inputHiddenHora.value = e.target.dataset.horaId;
+
+        // Agregar clase de seleccionado
+        e.target.classList.add('horas__hora--seleccionada');
     }
 
 })();

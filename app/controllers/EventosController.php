@@ -27,7 +27,7 @@ class EventosController {
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $evento->sincronizar($_POST);
-            debug($evento);
+
             $alertas = $evento->validar();
 
             if(empty($alertas)) {
