@@ -1,6 +1,7 @@
 <?php
 
 use Controllers\ApiEventos;
+use Controllers\ApiPonentes;
 use Controllers\AuthController;
 use Controllers\DashboardController;
 use Controllers\PonentesController;
@@ -56,3 +57,4 @@ $router->get('/admin/regalos', [RegalosController::class, 'index']);
 
 // API
 $router->get('/api/eventos-horario', [ApiEventos::class, 'index']);
+$router->get('/api/ponentes', [ApiPonentes::class, 'index']);
