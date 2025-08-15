@@ -58,7 +58,7 @@
                 <li data-hora-id="<?php echo $hora->id; ?>" id="horas" class="horas__hora horas__hora--deshabilitada"><?php echo $hora->hora; ?></li>
             <?php endforeach; ?>
         </ul>
-        <input type="hidden" name="hora_id" value="">
+        <input type="hidden" name="hora_id" value="<?php echo $evento->hora_id ?? ''; ?>">
     </div>
 
 </fieldset>
