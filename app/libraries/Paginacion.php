@@ -15,7 +15,9 @@ class Paginacion {
 
     // Offset (página 1, offset 0; página 2, offset 10); este valor es para mostrar 10 registros por página
     public function offset() {
-        return $this->registros_por_paginas * ($this->pagina_actual - 1);
+        $offset = $this->registros_por_paginas * ($this->pagina_actual - 1);
+
+        return max(0, $offset);
     }
 
     // Cálculo del total de páginas según la cantidad de registros

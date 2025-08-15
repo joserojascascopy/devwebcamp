@@ -188,9 +188,9 @@ class PonentesController {
     }
 
     public static function eliminar() {
-        isAdmin();
-
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            isAdmin();
+
             $id = $_POST['id'];
             /** @var Ponentes|null $ponente */
             $ponente = Ponentes::find($id);

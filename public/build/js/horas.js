@@ -6,9 +6,25 @@
     const inputHiddenDia = document.querySelector('[name="dia_id"]');
     const inputHiddenHora = document.querySelector('[name="hora_id"]');
 
+    const horaSeleccionada = document.querySelector(`[data-hora-id="${inputHiddenHora.value}"]`); // Guardamos en una constante la hora seleccionada del evento a editar
+
     let busqueda = {
-        categoria_id: '',
-        dia: ''
+        categoria_id: +categoria.value || '',
+        dia: +inputHiddenDia.value || ''
+    }
+
+    if (!Object.values(busqueda).includes('')) {
+        (async () => {
+            await buscarEventos();
+
+            const id = inputHiddenHora.value;
+            const horaAnterior = document.querySelector(`[data-hora-id="${id}"]`)
+
+            horaAnterior.classList.remove('horas__hora--deshabilitada');
+            horaAnterior.classList.add('horas__hora--seleccionada');
+
+            horaAnterior.addEventListener('click', seleccionarHora);
+        })();
     }
 
     dias.forEach(dia => dia.addEventListener('change', terminoBusqueda));
@@ -49,23 +65,32 @@
 
         listadoHoras.forEach(li => {
             // Quitar cualquier evento anterior (Al seleccionar otro día o una categoria diferente)
-            li.replaceWith(li.cloneNode(true));
-        });
+            // li.replaceWith(li.cloneNode(true));
 
-        // Volver a seleccionar después del replace
-        const listadoHorasActualizado = document.querySelectorAll('#horas');
-
-        // Deshabilitar todas las horas
-        listadoHorasActualizado.forEach(li => {
             li.classList.add('horas__hora--deshabilitada');
+            li.classList.remove('horas__hora--seleccionada');
+            li.removeEventListener('click', seleccionarHora);
         });
+
+        // // Volver a seleccionar después del replace
+        // const listadoHorasActualizado = document.querySelectorAll('#horas');
+
+        // // Deshabilitar todas las horas
+        // listadoHorasActualizado.forEach(li => {
+        //     li.classList.add('horas__hora--deshabilitada');
+        // });
 
         const horasTomadas = eventos.map(evento => evento.hora_id);
-        const listadoHorasArray = Array.from(listadoHorasActualizado);
+        const listadoHorasArray = Array.from(listadoHoras);
         const horarioDisponible = listadoHorasArray.filter(listado => !horasTomadas.includes(listado.dataset.horaId));
 
         horarioDisponible.forEach(horaDisponible => horaDisponible.classList.remove('horas__hora--deshabilitada'))
         horarioDisponible.forEach(horaDisponible => horaDisponible.addEventListener('click', seleccionarHora));
+
+        if (horaSeleccionada) {
+            horaSeleccionada.classList.remove('horas__hora--deshabilitada');
+            horaSeleccionada.onclick = seleccionarHora;
+        }
     }
 
     function seleccionarHora(e) {

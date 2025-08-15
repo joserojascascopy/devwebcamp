@@ -12,6 +12,8 @@ use MVC\Router;
 
 class EventosController {
     public static function index(Router $router) {
+        isAdmin();
+
         $pagina_actual = $_GET['page'] ?? '';
         $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);
 
@@ -55,6 +57,8 @@ class EventosController {
     }
 
     public static function crear(Router $router) {
+        isAdmin();
+
         $alertas = Evento::getAlertas();
 
         $categorias = Categoria::all();
@@ -88,6 +92,8 @@ class EventosController {
     }
 
     public static function editar(Router $router) {
+        isAdmin();
+
         $alertas = Evento::getAlertas();
 
         $evento_id = $_GET['id'] ?? '';
@@ -98,25 +104,25 @@ class EventosController {
         $dias = Dia::all();
         $horas = Hora::all();
 
-        /** @var Evento|null $evento */
-        $evento = Evento::find($evento_id);
+        /** @var Evento|null $evento_model */
+        $evento_model = Evento::find($evento_id);
 
-        if(!$evento) header('Location: /admin/eventos');
+        if(!$evento_model) header('Location: /admin/eventos');
 
         // Convertir el objeto a stdClass, para poder agregar atributos dinamicamente
-        $evento = (object) get_object_vars($evento);
+        $evento = (object) get_object_vars($evento_model);
         
         /** @var Ponentes|null $ponente */
         $ponente = Ponentes::find($evento->ponente_id);
         $evento->ponente = $ponente->nombre . ' ' . $ponente->apellido;
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $evento->sincronizar($_POST);
+            $evento_model->sincronizar($_POST);
 
-            $alertas = $evento->validar();
+            $alertas = $evento_model->validar();
 
             if(empty($alertas)) {
-                $resultado = $evento->guardar();
+                $resultado = $evento_model->guardar();
 
                 if($resultado) {
                     header('Location: /admin/eventos');
@@ -132,5 +138,25 @@ class EventosController {
             'dias' => $dias,
             'horas' => $horas
         ]);
+    }
+
+    public static function eliminar() {
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            isAdmin();
+
+            $id = $_POST['id'];
+            /** @var Evento|null $evento */
+            $evento = Evento::find($id);
+
+            if(empty($evento)) {
+                header('Location: /admin/eventos');
+            }
+
+            $resultado = $evento->eliminar();
+
+            if($resultado) {
+                header('Location: /admin/eventos');
+            }
+        }
     }
 }
