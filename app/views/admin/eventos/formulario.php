@@ -42,11 +42,13 @@
                         type="radio"
                         id="<?php echo strtolower($dia->nombre); ?>"
                         name="dia"
-                        value="<?php echo $dia->id; ?>">
+                        value="<?php echo $dia->id; ?>"
+                        <?php echo ($evento->dia_id === $dia->id) ? 'checked' : ''; ?>
+                        >
                 </div>
             <?php endforeach; ?>
         </div>
-        <input type="hidden" name="dia_id" value="">
+        <input type="hidden" name="dia_id" value="<?php echo $evento->dia_id; ?>">
     </div>
 
     <div class="formulario__campo">
@@ -66,7 +68,13 @@
 
     <div class="formulario__campo">
         <label class="formulario__label" for="ponentes">Ponente:</label>
-        <input class="formulario__input" type="text" id="ponentes" placeholder="Buscar Ponente">
+        <input 
+            class="formulario__input" 
+            type="text" 
+            id="ponentes" 
+            placeholder="Buscar Ponente"
+            value="<?php echo $evento->ponente ?? ''; ?>"
+        >
 
         <ul id="listado-ponentes" class="listado-ponentes">
 

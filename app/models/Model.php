@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use stdClass;
+
 class Model {
     // Conexión a la base de datos
     protected static $db;
@@ -214,6 +216,22 @@ class Model {
             }
         }
 
+        return $object;
+    }
+
+    // public function aStdClass() : stdClass {
+    //     return (object) get_object_vars($this);
+    // }
+
+    public function getStdClass(): stdClass {
+        $object = new stdClass;
+
+        foreach (static::$columnDB as $column) {
+            if(property_exists($this, $column)){
+                $object->$column = $this->$column;
+            }
+        }
+        
         return $object;
     }
 }

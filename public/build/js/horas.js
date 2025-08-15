@@ -1,21 +1,19 @@
 (function(){
-    let busqueda = {
-        categoria_id: '',
-        dia: ''
-    }
-
     const categoria = document.querySelector('[name="categoria_id"]');
     const dias = document.querySelectorAll('[name="dia"]');
     const inputHiddenDia = document.querySelector('[name="dia_id"]');
     const inputHiddenHora = document.querySelector('[name="hora_id"]');
-        
+
+    let busqueda = {
+        categoria_id: +categoria.value || '',
+        dia: ''
+    }
 
     dias.forEach(dia => dia.addEventListener('change', terminoBusqueda));
     categoria.addEventListener('change', terminoBusqueda);
 
     function terminoBusqueda(e) {
         busqueda[e.target.name] = e.target.value;
-
         // Reiniciar los campos ocultos
         inputHiddenHora.value = '';
         inputHiddenDia.value = '';

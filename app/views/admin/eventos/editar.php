@@ -10,10 +10,10 @@
 <div class="dashboard__formulario">
     <?php include_once __DIR__ . '/../../templates/alertas.php'; ?>
 
-    <form class="formulario" method="POST" action="/admin/eventos/crear">
+    <form class="formulario" method="POST">
         <?php include_once __DIR__ . '/formulario.php'; ?>
 
-        <input class="formulario__submit formulario__submit--registrar" type="submit" value="Registrar Evento">
+        <input class="formulario__submit formulario__submit--registrar" type="submit" value="Editar Evento">
     </form>
 </div>
 
