@@ -39,6 +39,10 @@ h3 {
     @include m.nombre-pagina;
 }
 
+[class$="__descripcion"] {
+    @include m.descripcion-pagina;
+}
+
 .text-center {
     text-align: center;
 }
