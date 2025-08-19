@@ -11,6 +11,7 @@
   "description": "",
   "devDependencies": {
     "autoprefixer": "^10.4.14",
+    "css-loader": "^7.1.2",
     "gulp": "^4.0.2",
     "gulp-avif": "^1.1.1",
     "gulp-imagemin": "^7.1.0",
@@ -23,9 +24,11 @@
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-optipng": "^8.0.0",
     "postcss": "^8.4.31",
-    "sass": "^1.86.3"
+    "sass": "^1.86.3",
+    "style-loader": "^4.0.0"
   },
   "dependencies": {
+    "swiper": "^11.2.10",
     "webpack-stream": "^7.0.0"
   }
 }

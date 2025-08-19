@@ -52,6 +52,17 @@ function js() {
     return src('./app/assets/js/**/*.js')
         .pipe(webpack({
             mode: 'production',
+            module: {
+                rules: [
+                    {
+                        test: /\.css$/i,
+                        use: ['style-loader', 'css-loader']
+                        
+                    },
+                    
+                ]
+            },
+            watch: true,
             entry: './app/assets/js/script.js',
         }))
         .pipe(sourcemaps.init())
