@@ -1,4 +1,6 @@
 const tagsInput = document.querySelector('#tags_input');
+if (!tagsInput) return; // Si no existe el input, salir de la función
+
 const tagsDiv = document.querySelector('#tags');
 const tagsInputHidden = document.querySelector('[name="tags"]');
 let tags = [];

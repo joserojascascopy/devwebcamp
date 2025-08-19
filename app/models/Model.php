@@ -172,6 +172,15 @@ class Model {
         return $resultado;
     }
 
+    // Retornar los registros por un orden
+    public static function orderBy($column, $order = 'ASC') {
+        $query = "SELECT * FROM " . static::$table . " ORDER BY {$column} {$order}";
+
+        $resultado = self::consultaSQL($query);
+
+        return $resultado;
+    }
+
     public static function consultaSQL($query) {
         // Consulta a la DB
         $consulta = self::$db->query($query);

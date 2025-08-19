@@ -5,6 +5,12 @@ const sourcemaps = require('gulp-sourcemaps');
 const postcss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 
+// Webpack
+const webpack = require('webpack-stream');
+
+// JS
+const rename = require('gulp-rename');
+
 // IMAGENES
 const imagemin = require('gulp-imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
@@ -24,27 +30,34 @@ function css() {
 function imagenes() {
     return src('./app/assets/img/**/*.{png,jpg}')
         .pipe(imagemin([
-            imageminMozjpeg({quality: 75}),
-            imageminOptipng({optimizationLevel: 3})
+            imageminMozjpeg({ quality: 75 }),
+            imageminOptipng({ optimizationLevel: 3 })
         ]))
         .pipe(dest('./public/build/img'))
 }
 
 function versionWebp() {
     return src('./app/assets/img/**/*.{png,jpg}')
-        .pipe(webp({quality: 50}))
+        .pipe(webp({ quality: 50 }))
         .pipe(dest('./public/build/img'))
 }
 
 function versionAvif() {
     return src('./app/assets/img/**/*.{png,jpg}')
-        .pipe(avif({quality: 50}))
+        .pipe(avif({ quality: 50 }))
         .pipe(dest('./public/build/img'))
 }
 
 function js() {
     return src('./app/assets/js/**/*.js')
-        .pipe(dest('./public/build/js'));
+        .pipe(webpack({
+            mode: 'production',
+            entry: './app/assets/js/script.js',
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(sourcemaps.write('.'))
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(dest('./public/build/js'))
 }
 
 function watchArchivos() {

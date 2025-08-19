@@ -1,5 +1,8 @@
 (function () {
     const ponentesInput = document.querySelector('#ponentes');
+
+    if (!ponentesInput) return; // Si no existe el input, salir de la función
+
     const listadoPonentes = document.querySelector('#listado-ponentes');
     const inputHiddenPonente = document.querySelector('[name="ponente_id"]');
 

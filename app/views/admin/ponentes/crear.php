@@ -16,5 +16,3 @@
         <input class="formulario__submit formulario__submit--registrar" type="submit" value="Registrar Ponente">
     </form>
 </div>
-
-<script src="/build/js/tags.js" defer></script>

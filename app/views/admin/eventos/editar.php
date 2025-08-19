@@ -16,6 +16,3 @@
         <input class="formulario__submit formulario__submit--registrar" type="submit" value="Editar Evento">
     </form>
 </div>
-
-<script src="/build/js/horas.js" defer></script>
-<script src="/build/js/ponentes.js" defer></script>
