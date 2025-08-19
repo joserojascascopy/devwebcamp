@@ -10,8 +10,6 @@
         const inputHiddenDia = document.querySelector('[name="dia_id"]');
         const inputHiddenHora = document.querySelector('[name="hora_id"]');
 
-        const horaSeleccionada = document.querySelector(`[data-hora-id="${inputHiddenHora.value}"]`); // Guardamos en una constante la hora seleccionada del evento a editar
-
         let busqueda = {
             categoria_id: +categoria.value || '',
             dia: +inputHiddenDia.value || ''
