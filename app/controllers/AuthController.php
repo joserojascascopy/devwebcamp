@@ -38,7 +38,7 @@ class AuthController {
                             'nombre' => $usuario->nombre,
                             'email' => $email,
                             'login' => true,
-                            'admin' => $usuario->admin ?? null
+                            'admin' => $usuario->admin
                         ];
 
                         if($usuario->admin) {

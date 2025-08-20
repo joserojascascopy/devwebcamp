@@ -1,8 +1,15 @@
 <header class="header">
     <div class="header__container">
         <div class="header__navegacion">
-            <a href="/registrarse" class="header__enlace">Registrarse</a>
-            <a href="/login" class="header__enlace">Iniciar sesión</a>
+            <?php if (isAuth()) { ?>
+                <a href="<?php echo isAdmin() ? '/admin/dashboard' : '/finalizar-registro'; ?>" class="header__enlace">Administrar</a>
+                <form class="header__form" method="POST" action="/logout">
+                    <input type="submit" value="Cerrar Sesión" class="header__submit--logout">
+                </form>
+            <?php } else { ?>
+                <a href="/registrarse" class="header__enlace">Registrarse</a>
+                <a href="/login" class="header__enlace">Iniciar sesión</a>
+            <?php } ?>
         </div>
         <div class="header__contenido">
             <a href="/">
@@ -18,12 +25,14 @@
 </header>
 <div class="barra">
     <div class="barra__contenido">
-        <a href="/"><h2 class="barra__logo">&#60;DevWebCamp /></h2></a>
+        <a href="/">
+            <h2 class="barra__logo">&#60;DevWebCamp /></h2>
+        </a>
         <nav class="navegacion">
-            <a href="/devwebcamp" class="navegacion__enlace">Evento</a>
-            <a href="/paquetes" class="navegacion__enlace">Paquetes</a>
-            <a href="/workshops-conferencias" class="navegacion__enlace">Workshops / Conferencias</a>
-            <a href="/registrarse" class="navegacion__enlace">Comprar Pase</a>
+            <a href="/devwebcamp" class="navegacion__enlace <?php echo pagina_actual('/devwebcamp') ? 'navegacion__enlace--actual' : ''; ?>">Evento</a>
+            <a href="/paquetes" class="navegacion__enlace <?php echo pagina_actual('/paquetes') ? 'navegacion__enlace--actual' : ''; ?>">Paquetes</a>
+            <a href="/workshops-conferencias" class="navegacion__enlace <?php echo pagina_actual('/workshops-conferencias') ? 'navegacion__enlace--actual' : ''; ?>">Workshops / Conferencias</a>
+            <a href="/registrarse" class="navegacion__enlace <?php echo pagina_actual('/registrarse') ? 'navegacion__enlace--actual' : ''; ?>">Comprar Pase</a>
         </nav>
     </div>
 </div>

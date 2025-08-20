@@ -30,4 +30,9 @@
             margin-bottom: 0;
         }
     }
+
+    &__enlace--actual {
+        background-color: v.$blanco;
+        color: v.$azul;
+    }
 }

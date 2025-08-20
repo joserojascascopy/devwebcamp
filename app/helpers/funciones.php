@@ -7,22 +7,26 @@ function debug($variable) {
     exit;
 }
 
-function pagina_actual($path) : bool {
+function pagina_actual($path): bool {
+    if (!isset($_SERVER['PATH_INFO'])) {
+        return false;
+    }
+
     return str_contains($_SERVER['PATH_INFO'], $path) ? true : false;
 }
 
 function isAuth() {
-    session_start();
-
-    if(!$_SESSION['login']) {
-        header('Location: /login');
+    if(!isset($_SESSION)) {
+        session_start();
     }
+
+    return isset($_SESSION['login']) && !empty($_SESSION);
 }
 
 function isAdmin() {
-    session_start();
-
-    if(!$_SESSION['admin']) {
-        header('Location: /login');
+    if(!isset($_SESSION)) {
+        session_start();
     }
+
+    return isset($_SESSION['login']) && !empty($_SESSION['admin']);
 }

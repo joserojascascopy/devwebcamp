@@ -33,6 +33,15 @@
         }
     }
 
+    &__form {
+        display: flex;
+        align-items: center;
+    }
+
+    &__submit--logout {
+        @extend .header__enlace;
+    }
+
     &__contenido {
         padding-top: 10rem;
 
