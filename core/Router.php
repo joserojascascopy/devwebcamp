@@ -33,7 +33,7 @@ class Router {
             call_user_func($funcion, $this);
         }else {
             http_response_code(404);
-            echo "Error 404 - Page not found: $currentUrl";
+            header('Location: /404');
         }
     }
 
