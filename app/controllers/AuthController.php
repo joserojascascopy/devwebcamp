@@ -46,7 +46,7 @@ class AuthController {
                             header('Location: /admin/dashboard');
                         }else {
                             // Redirigir al usuario a la pagina principal
-                            header('Location: /');
+                            header('Location: /finalizar-registro');
                         }
 
                     }else {

@@ -12,6 +12,10 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="/build/css/styles.css">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- <script
+        src="https://www.sandbox.paypal.com/sdk/js?client-id=&currency=USD" data-sdk-integration-source="button-factory">
+    </script> -->
+
     <title>DevWeb | <?php echo $titulo ?? ''; ?></title>
 </head>
 
@@ -21,11 +25,13 @@
     <?php include_once __DIR__ . '/templates/footer.php'; ?>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
         AOS.init({
             once: true,
         });
     </script>
+
     <script src="/build/js/main.min.js" defer></script>
 </body>
 
