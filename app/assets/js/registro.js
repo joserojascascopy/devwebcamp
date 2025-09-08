@@ -1,20 +1,38 @@
+import Swal from 'sweetalert2';
+
 (function () {
     let eventos = [];
-    const eventosBoton = document.querySelectorAll('.evento__agregar');
     const resumen = document.querySelector('#registro-resumen');
+
+    if (!resumen) return;
+
+    const eventosBoton = document.querySelectorAll('.evento__agregar');
 
     eventosBoton.forEach(boton => {
         boton.addEventListener('click', seleccionarEvento);
     })
 
-    function seleccionarEvento({ target }) {
-        // Deshabilitar el evento una vez seleccionado
-        target.disabled = true;
+    const formularioRegistro = document.querySelector('#registro');
 
-        eventos = [...eventos, {
-            id: target.dataset.id,
-            titulo: target.parentElement.querySelector('.evento__nombre').textContent.trim()
-        }];
+    formularioRegistro.addEventListener('submit', submitFormulario);
+
+    function seleccionarEvento({ target }) {
+        if (eventos.length < 5) {
+            // Deshabilitar el evento una vez seleccionado
+            target.disabled = true;
+
+            eventos = [...eventos, {
+                id: target.dataset.id,
+                titulo: target.parentElement.querySelector('.evento__nombre').textContent.trim()
+            }];
+        } else {
+            Swal.fire({
+                title: 'Error',
+                text: 'Máximo 5 eventos por registro',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+        }
 
         mostrarEventos();
     }
@@ -55,8 +73,28 @@
         mostrarEventos();
 
         // Volver a habilitar el boton
-        const botonEliminar = document.querySelector(`[data-id="${id}"]`);
-        botonEliminar.disabled = false;
+        const botonAgregar = document.querySelector(`[data-id="${id}"]`);
+        botonAgregar.disabled = false;
+    }
+
+    function submitFormulario(e) {
+        e.preventDefault();
+
+        // Obtener el regalo
+        const regaloId = document.querySelector('#regalo').value;
+
+        const eventosId = eventos.map(evento => evento.id);
+
+        if(eventosId.length === 0 || regaloId === '') {
+            Swal.fire({
+                title: 'Error',
+                text: 'Elige al menos 1 evento y un regalo',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
+
+            return;
+        }
     }
 
 })();

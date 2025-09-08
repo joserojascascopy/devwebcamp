@@ -90,4 +90,23 @@
             cursor: pointer;
         }
     }
+
+    &__regalo {
+        margin: 3rem 0;
+    }
+
+    &__label {
+        display: block;
+        font-size: 2rem;
+        font-weight: v.$bold;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    &__select {
+        width: 100%;
+        border: 1px solid v.$gris;
+        padding: 1rem;
+        border-radius: .5rem;
+    }
 }

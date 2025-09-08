@@ -4,7 +4,7 @@ namespace Models;
 
 class Registro extends Model {
     // Atributos de la DB
-    protected static $columnDB = ['id', 'paquete_id', 'pago_id', 'token', 'usuario_id'];
+    protected static $columnDB = ['id', 'paquete_id', 'pago_id', 'token', 'usuario_id', 'regalo_id'];
     protected static $table = 'registros';
 
     public $id;
@@ -12,6 +12,7 @@ class Registro extends Model {
     public $pago_id;
     public $token;
     public $usuario_id;
+    public $regalo_id;
 
     public function __construct($args = []) {
         $this->id = $args['id'] ?? '';
@@ -19,5 +20,6 @@ class Registro extends Model {
         $this->pago_id = $args['pago_id'] ?? '';
         $this->token = $args['token'] ?? '';
         $this->usuario_id = $args['usuario_id'] ?? '';
+        $this->regalo_id = $args['regalo_id'] ?? '';
     }
 }

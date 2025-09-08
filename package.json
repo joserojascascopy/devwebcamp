@@ -28,6 +28,7 @@
     "style-loader": "^4.0.0"
   },
   "dependencies": {
+    "sweetalert2": "^11.23.0",
     "swiper": "^11.2.10",
     "webpack-stream": "^7.0.0"
   }
