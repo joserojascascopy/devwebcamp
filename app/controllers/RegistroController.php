@@ -205,11 +205,29 @@ class RegistroController {
                 return;
             }
 
+            $eventos_array = [];
+
             // Válidar la disponibilidad de los eventos seleccionados
             foreach($eventos_id as $evento_id) {
+                /** @var Evento|null $evento */
                 $evento = Evento::find($evento_id);
 
-                debug($evento);
+                // Comprobar que el evento exista
+                if(!isset($evento) || $evento->disponibles === '0') {
+                    echo json_encode(['resultado' => false]);
+
+                    return;
+                }
+
+                $eventos_array[] = $evento;
+            }
+
+            foreach($eventos_array as $evento) {
+                $evento->disponibles -= 1;
+
+                $evento->guardar();
+
+                // Almacenar el registro
             }
         }
 
