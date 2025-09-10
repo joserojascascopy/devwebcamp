@@ -46,6 +46,10 @@
                 <li class="paquete__elemento">Acceso a las Grabaciones</li>
             </ul>
             <p class="paquete__precio">$49</p>
+
+            <form method="POST" action="/finalizar-registro/virtual">
+                <input type="submit" class="paquetes__submit" value="Inscribirme Virtual">
+            </form>
         </div>
 
     </div>
