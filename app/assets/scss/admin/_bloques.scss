@@ -1,0 +1,57 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+@use 'sass:color';
+
+.bloques {
+    @include m.container;
+
+    &__grid {
+        @include m.grid(1, 3rem);
+
+        @include m.desktop {
+            @include m.grid(2, 3rem);
+        }
+    }
+}
+
+.bloque {
+    padding: 2rem;
+    color: v.$blanco;
+    border-radius: 1rem;
+
+    @include m.tablet {
+        margin-top: 10rem;
+    }
+
+    &:nth-child(1) {
+        @include m.bg-gradient(#f97316);
+    }
+
+    &:nth-child(2) {
+        @include m.bg-gradient(#a855f7);
+    }
+
+    &:nth-child(3) {
+        @include m.bg-gradient(#52860a);
+    }
+
+    &:nth-child(4) {
+        @include m.bg-gradient(#17769e);
+    }
+
+    &__heading {
+        margin: 1rem 0;
+        font-size: 3rem;
+    }
+
+    &__texto {
+        color: v.$blanco;
+        margin: 1rem 0;
+
+        &--cantidad {
+            font-weight: v.$black;
+            text-align: center;
+            font-size: 6rem;
+        }
+    }
+}

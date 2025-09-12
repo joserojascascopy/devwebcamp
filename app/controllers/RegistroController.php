@@ -69,7 +69,6 @@ class RegistroController {
             ];
 
             $registro = new Registro($datos);
-
             $resultado = $registro->guardar();
 
             if ($resultado) {

@@ -93,6 +93,26 @@ class Model {
         return array_shift($total);
     }
 
+    // Traer el total de registros por su columna y valor
+    public static function totalWhere($columna = '', $valor = '') {
+        $query = "SELECT COUNT(*) FROM " . static::$table;
+        if($columna) {
+            $query .= " WHERE $columna = $valor";
+        }
+        $resultado = self::$db->query($query);
+        $total = $resultado->fetch_array();
+
+        return array_shift($total);
+    }
+
+    // Retornar por orden y con un limite
+    public static function ordenar($columna, $orden, $limite) {
+        $query = "SELECT * FROM " . static::$table . " ORDER BY $columna $orden LIMIT $limite";
+        $resultado = self::consultaSQL($query);
+
+        return $resultado;
+    }
+
     // Paginar los registros
     public static function paginar($por_pagina, $offset) {
         $query = "SELECT * FROM " . static::$table . " LIMIT $por_pagina OFFSET $offset";
@@ -149,6 +169,13 @@ class Model {
         $resultado = self::consultaSQL($query);
 
         return array_shift($resultado);
+    }
+
+    // Obtener un registro con cierta cantidad
+    public static function get($limite) {
+        $query = "SELECT * FROM " . static::$table . " ORDER BY id DESC LIMIT $limite " ;
+        $resultado = self::consultaSQL($query);
+        return $resultado;
     }
 
     // Busqueda where con multiples opciones

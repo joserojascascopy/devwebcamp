@@ -10,7 +10,9 @@ use Libraries\Paginacion;
 
 class PonentesController {
     public static function index(Router $router) {
-        isAdmin();
+        if(!isAdmin()) {
+            header('Location: /login');
+        }
 
         $pagina_actual = $_GET['page'];
         $pagina_actual = filter_var($pagina_actual, FILTER_VALIDATE_INT);

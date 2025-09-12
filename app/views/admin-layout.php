@@ -22,6 +22,7 @@
         </main>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/build/js/main.min.js" defer></script>
 </body>
 

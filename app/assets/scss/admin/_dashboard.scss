@@ -139,4 +139,8 @@
         padding: 2rem;
         border-radius: 1rem;
     }
+
+    &__grafica {
+        @include m.container-md;
+    }
 }
