@@ -1,48 +1,56 @@
+const { plugin } = require("postcss");
+
 (function () {
     const ctx = document.getElementById('myChart');
 
-    const labels = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"];
+    obtenerRegalos();
 
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'My First Dataset',
-            data: [65, 59, 80, 81, 56, 55, 40],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-                'rgba(255, 205, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(201, 203, 207, 0.2)'
-            ], borderColor: [
-                'rgb(255, 99, 132)',
-                'rgb(255, 159, 64)',
-                'rgb(255, 205, 86)',
-                'rgb(75, 192, 192)',
-                'rgb(54, 162, 235)',
-                'rgb(153, 102, 255)',
-                'rgb(201, 203, 207)'
-            ],
-            borderWidth: 1
-        }]
-    };
+    async function obtenerRegalos() {
+        const url = '/api/regalos';
+        const res = await fetch(url);
+        const body = await res.json();
 
-    const config = {
-        type: 'bar',
-        data: data,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
+        const labels = body.map(regalo => regalo.nombre);
+
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: '',
+                data: body.map(regalo => regalo.total[0]),
+                backgroundColor: [
+                    '#ea580c',
+                    '#84cc16',
+                    '#22d3ee',
+                    '#a855f7',
+                    '#ef4444',
+                    '#14b8a6',
+                    '#db2777',
+                    '#e11d48',
+                    '#7e22ce'
+                ]
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false,
+                    }
                 }
-            }
-        },
-    };
+            },
+        };
 
-    if (ctx) {
-        new Chart(ctx, config);
+        if (ctx) {
+            new Chart(ctx, config);
+        }
     }
 
 })();

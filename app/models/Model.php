@@ -105,6 +105,23 @@ class Model {
         return array_shift($total);
     }
 
+    // Total de registros con un array where
+    public static function totalArray($array = []) {
+        $query = "SELECT COUNT(*) FROM " . static::$table . " WHERE ";
+        
+        foreach($array as $key => $value) {
+            if($key == array_key_last($array)) {
+                $query .= " $key = '$value'";
+            } else {
+                $query .= " $key = '$value' AND ";
+            }
+        }
+        $resultado = self::$db->query($query);
+        $total = $resultado->fetch_array();
+
+        return $total;
+    }
+
     // Retornar por orden y con un limite
     public static function ordenar($columna, $orden, $limite) {
         $query = "SELECT * FROM " . static::$table . " ORDER BY $columna $orden LIMIT $limite";
