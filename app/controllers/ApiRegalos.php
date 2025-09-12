@@ -7,6 +7,12 @@ use Models\Registro;
 
 class ApiRegalos {
     public static function index() {
+        if(!isAdmin()) {
+            echo json_encode([]);
+
+            return;
+        }
+
         $regalos = Regalo::all();
         
         // Convertir cada objeto del array a stdClass, para poder agregar atributos dinamicamente
